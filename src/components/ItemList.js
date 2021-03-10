@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class ItemList extends Component {
   state = {
-    items: [
+    itemList: [
       {
         name: "Martin Portable Propane BBQ Gas Grill",
         price: "139.99",
@@ -23,6 +23,20 @@ export default class ItemList extends Component {
   };
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        {this.state.itemList.map(({ name, price, imageLink, description }) => {
+          return (
+            <div>
+              <p>Name: {name}</p>
+              <p>Price: ${price}</p>
+              <img src={imageLink} alt={`Picture of ${name}`} width="600px" />
+              <p>{description}</p>
+              <hr></hr>
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 }
