@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import AddItem from "./AddItem";
 
 export default class ItemList extends Component {
   state = {
+    // The list of items in the store
     itemList: [
       {
         name: "Martin Portable Propane BBQ Gas Grill",
@@ -20,17 +22,107 @@ export default class ItemList extends Component {
           "Experience lightning-fast loading with an ultra-high speed SSD, deeper immersion with support for haptic feedback, adaptive triggers and 3D Audio*, and an all-new generation of incredible PlayStation® games.",
       },
     ],
+
+    // These are for the Add and Edit Components - contain the variables for a new object
+    itemName: "",
+    itemPrice: "",
+    itemImageLink: "",
+    itemDescription: "",
+
+    // Toggle Display of Add Component
+    addDisplayOn: false,
+  };
+
+  /****************************************************************
+   * Functions for Adding Item
+   ***************************************************************/
+  addItem = (event) => {
+    event.preventDefault();
+
+    const prevItemList = [...this.state.itemList];
+    const newItem = {
+      name: this.state.itemName,
+      price: this.state.itemPrice,
+      imageLink: this.state.itemImageLink,
+      description: this.state.itemDescription,
+    };
+
+    this.setState({
+      ...this.state,
+      itemList: [...prevItemList, newItem],
+      itemName: "",
+      itemPrice: "",
+      itemImageLink: "",
+      itemDescription: "",
+    });
+  };
+
+  // On Change Handlers
+  handleNameOnChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handlePriceOnChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleImgLinkOnChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  handleDescOnChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // Toggles the add item display - will also be used for edit
+  toggleAddDisplay = (event) => {
+    event.preventDefault();
+
+    if (this.state.addDisplayOn) {
+      this.setState({
+        addDisplayOn: false,
+      });
+    } else {
+      this.setState({
+        addDisplayOn: true,
+      });
+    }
   };
 
   render() {
     return (
       <div>
+        {/* For Add Display */}
+        <button onClick={this.toggleAddDisplay}>Add Item</button>
+        {this.state.addDisplayOn ? (
+          <AddItem
+            itemList={this.state.itemList}
+            itemName={this.state.itemName}
+            itemPrice={this.state.itemPrice}
+            itemDescription={this.state.itemDescription}
+            itemImageLink={this.state.itemImageLink}
+            addItem={this.addItem}
+            handleDescOnChange={this.handleDescOnChange}
+            handleImgLinkOnChange={this.handleImgLinkOnChange}
+            handleNameOnChange={this.handleNameOnChange}
+            handlePriceOnChange={this.handlePriceOnChange}
+          />
+        ) : null}
         {this.state.itemList.map(({ name, price, imageLink, description }) => {
           return (
             <div>
+              {/* Item List Display */}
               <p>Name: {name}</p>
               <p>Price: ${price}</p>
-              <img src={imageLink} alt={`Picture of ${name}`} width="600px" />
+              <img src={imageLink} alt={`${name}`} width="600px" />
               <p>{description}</p>
               <hr></hr>
             </div>
