@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
 import AddItem from "./AddItem";
 
 export default class ItemList extends Component {
@@ -6,6 +7,7 @@ export default class ItemList extends Component {
     // The list of items in the store
     itemList: [
       {
+        id: uuidv4(),
         name: "Martin Portable Propane BBQ Gas Grill",
         price: "139.99",
         imageLink:
@@ -14,6 +16,7 @@ export default class ItemList extends Component {
           "Compatible with both high and low pressure lines – ideal for trailers – this portable gas grill is a must-have for any barbeque lover. Not only does it need no external power source (thanks to its piezo-ignition system) it gives you the control over how each and every meal turns out. That’s why we created the MARTIN portable propane bbq gas grill, you have the freedom to adjust the temperature according to the meat – or vegetable – you’re grilling which means you’ll be able to get that delicious “seared on the outside, juicy on the inside” performance every time. Thanks to the closing lid you’ll find it’s much easier to get evenly-cooked food and keep the bugs away while you’re cooking.",
       },
       {
+        id: uuidv4(),
         name: "PlayStation 5 (digital)",
         price: "500.00",
         imageLink:
@@ -41,6 +44,7 @@ export default class ItemList extends Component {
 
     const prevItemList = [...this.state.itemList];
     const newItem = {
+      id: uuidv4(),
       name: this.state.itemName,
       price: this.state.itemPrice,
       imageLink: this.state.itemImageLink,
@@ -97,6 +101,10 @@ export default class ItemList extends Component {
     }
   };
 
+  /****************************************************************
+   * Functions for Editing Item
+   ***************************************************************/
+
   render() {
     return (
       <div>
@@ -116,18 +124,22 @@ export default class ItemList extends Component {
             handlePriceOnChange={this.handlePriceOnChange}
           />
         ) : null}
-        {this.state.itemList.map(({ name, price, imageLink, description }) => {
-          return (
-            <div>
-              {/* Item List Display */}
-              <p>Name: {name}</p>
-              <p>Price: ${price}</p>
-              <img src={imageLink} alt={`${name}`} width="600px" />
-              <p>{description}</p>
-              <hr></hr>
-            </div>
-          );
-        })}
+
+        {/* Item List Display */}
+        {this.state.itemList.map(
+          ({ name, price, imageLink, description, id }) => {
+            return (
+              <div>
+                <p>Name: {name}</p>
+                <p>Price: ${price}</p>
+                <img src={imageLink} alt={`${name}`} width="600px" />
+                <p>{description}</p>
+                <button>Edit {name}</button>
+                <hr></hr>
+              </div>
+            );
+          }
+        )}
       </div>
     );
   }
