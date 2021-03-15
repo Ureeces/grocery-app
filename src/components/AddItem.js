@@ -10,7 +10,7 @@ const AddItem = (props) => {
     handleImgLinkOnChange,
     handleNameOnChange,
     handlePriceOnChange,
-    addItem,
+    addItemHandle,
   } = props;
 
   return (
@@ -48,7 +48,7 @@ const AddItem = (props) => {
         onChange={handleDescOnChange}
       />
       <br />
-      <button onClick={addItem}>Submit Item</button>
+      <button onClick={addItemHandle}>Submit Item</button>
     </div>
   );
 };

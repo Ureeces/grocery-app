@@ -34,12 +34,15 @@ export default class ItemList extends Component {
 
     // Toggle Display of Add Component
     addDisplayOn: false,
+
+    // Toggle Display of Edit Component
+    editDisplayOn: false,
   };
 
   /****************************************************************
    * Functions for Adding Item
    ***************************************************************/
-  addItem = (event) => {
+  addItemHandle = (event) => {
     event.preventDefault();
 
     const prevItemList = [...this.state.itemList];
@@ -104,6 +107,23 @@ export default class ItemList extends Component {
   /****************************************************************
    * Functions for Editing Item
    ***************************************************************/
+  editItemHandle = (event) => {
+    // let itemListCopy = [...this.state.itemList];
+  };
+
+  toggleEditDisplay = (event) => {
+    event.preventDefault();
+
+    if (this.state.editDisplayOn) {
+      this.setState({
+        editDisplayOn: false,
+      });
+    } else {
+      this.setState({
+        editDisplayOn: true,
+      });
+    }
+  };
 
   render() {
     return (
@@ -117,7 +137,7 @@ export default class ItemList extends Component {
             itemPrice={this.state.itemPrice}
             itemDescription={this.state.itemDescription}
             itemImageLink={this.state.itemImageLink}
-            addItem={this.addItem}
+            addItemHandle={this.addItemHandle}
             handleDescOnChange={this.handleDescOnChange}
             handleImgLinkOnChange={this.handleImgLinkOnChange}
             handleNameOnChange={this.handleNameOnChange}
@@ -130,6 +150,7 @@ export default class ItemList extends Component {
           ({ name, price, imageLink, description, id }) => {
             return (
               <div>
+                <button>X</button>
                 <p>Name: {name}</p>
                 <p>Price: ${price}</p>
                 <img src={imageLink} alt={`${name}`} width="600px" />
