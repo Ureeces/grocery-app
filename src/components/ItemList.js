@@ -50,6 +50,21 @@ export default class ItemList extends Component {
   };
 
   /****************************************************************
+   * Functions for Deleting Item
+   ***************************************************************/
+  // Handler for deleting an item
+  deleteItemHandle = (targetID) => {
+    const newItemList = this.state.itemList.filter((item) => {
+      return item.id !== targetID;
+    });
+
+    this.setState({
+      ...this.state,
+      itemList: newItemList,
+    });
+  };
+
+  /****************************************************************
    * Functions for Adding Item
    ***************************************************************/
   // Handler for Adding an Item
@@ -190,7 +205,7 @@ export default class ItemList extends Component {
           ({ name, price, imageLink, description, id }) => {
             return (
               <div>
-                <button>X</button>
+                <button onClick={() => this.deleteItemHandle(id)}>X</button>
                 <p>Name: {name}</p>
                 <p>Price: ${price}</p>
                 <img src={imageLink} alt={`${name}`} width="600px" />
