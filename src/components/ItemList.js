@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import AddItem from "./AddItem";
+import EditItem from "./EditItem";
 
 export default class ItemList extends Component {
   state = {
@@ -26,7 +27,7 @@ export default class ItemList extends Component {
       },
     ],
 
-    // These are for the Add and Edit Components - contain the variables for a new object
+    // These are for the Add Component - contain the variables for a new object
     itemName: "",
     itemPrice: "",
     itemImageLink: "",
@@ -37,11 +38,21 @@ export default class ItemList extends Component {
 
     // Toggle Display of Edit Component
     editDisplayOn: false,
+
+    // The ID of the item to edit
+    selectedItemID: "",
+
+    // These are for the Edit Component - contain the variables for the editing object
+    tempName: "",
+    tempPrice: "",
+    tempImageLink: "",
+    tempDescription: "",
   };
 
   /****************************************************************
    * Functions for Adding Item
    ***************************************************************/
+  // Handler for Adding an Item
   addItemHandle = (event) => {
     event.preventDefault();
 
@@ -61,70 +72,82 @@ export default class ItemList extends Component {
       itemPrice: "",
       itemImageLink: "",
       itemDescription: "",
+      addDisplayOn: !this.state.addDisplayOn,
     });
   };
 
-  // On Change Handlers
-  handleNameOnChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  handlePriceOnChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  handleImgLinkOnChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  handleDescOnChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
-  // Toggles the add item display - will also be used for edit
+  // Toggles the add item display
   toggleAddDisplay = (event) => {
     event.preventDefault();
 
-    if (this.state.addDisplayOn) {
-      this.setState({
-        addDisplayOn: false,
-      });
-    } else {
-      this.setState({
-        addDisplayOn: true,
-      });
-    }
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        addDisplayOn: !prevState.addDisplayOn,
+      };
+    });
   };
 
   /****************************************************************
    * Functions for Editing Item
    ***************************************************************/
-  editItemHandle = (event) => {
-    // let itemListCopy = [...this.state.itemList];
+  // Handler for editing an item
+  editItemHandle = () => {
+    console.log(this.state.selectedItemID);
+    const newItemList = this.state.itemList.map((item) => {
+      if (item.id === this.state.selectedItemID) {
+        return {
+          id: item.id,
+          name: this.state.tempName,
+          price: this.state.tempPrice,
+          imageLink: this.state.tempImageLink,
+          description: this.state.tempDescription,
+        };
+      } else {
+        return item;
+      }
+    });
+
+    this.setState({
+      ...this.state,
+      itemList: newItemList,
+      editDisplayOn: !this.state.editDisplayOn,
+    });
   };
 
+  // Toggles the edit item display
   toggleEditDisplay = (event) => {
     event.preventDefault();
 
-    if (this.state.editDisplayOn) {
-      this.setState({
-        editDisplayOn: false,
-      });
-    } else {
-      this.setState({
-        editDisplayOn: true,
-      });
-    }
+    this.setState((prevState) => {
+      return {
+        ...prevState,
+        editDisplayOn: !prevState.editDisplayOn,
+      };
+    });
   };
 
+  /****************************************************************
+   * On Change Handlers
+   ***************************************************************/
+  handleInputOnChange = (event) => {
+    this.setState({
+      ...this.state,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  // Edit Select OnChange Function
+  handleEditSelect = (event) => {
+    this.setState({
+      ...this.state,
+      selectedItemID: event.target.value,
+    });
+  };
+
+  /****************************************************************
+   * Rendering
+   ****************************************************************/
   render() {
     return (
       <div>
@@ -138,13 +161,30 @@ export default class ItemList extends Component {
             itemDescription={this.state.itemDescription}
             itemImageLink={this.state.itemImageLink}
             addItemHandle={this.addItemHandle}
-            handleDescOnChange={this.handleDescOnChange}
-            handleImgLinkOnChange={this.handleImgLinkOnChange}
-            handleNameOnChange={this.handleNameOnChange}
-            handlePriceOnChange={this.handlePriceOnChange}
+            handleInputOnChange={this.handleInputOnChange}
           />
-        ) : null}
-
+        ) : null}{" "}
+        <br />
+        <select onChange={this.handleEditSelect}>
+          <option selected disabled>
+            Select an Item to Edit
+          </option>
+          {this.state.itemList.map(({ name, id }) => {
+            return <option value={id}>{name}</option>;
+          })}
+        </select>
+        <button onClick={this.toggleEditDisplay}>Edit Item</button>
+        {this.state.editDisplayOn ? (
+          <EditItem
+            itemList={this.state.itemList}
+            tempName={this.state.tempName}
+            tempPrice={this.state.tempPrice}
+            tempDescription={this.state.tempDescription}
+            tempImageLink={this.state.tempImageLink}
+            editItemHandle={this.editItemHandle}
+            handleInputOnChange={this.handleInputOnChange}
+          />
+        ) : null}{" "}
         {/* Item List Display */}
         {this.state.itemList.map(
           ({ name, price, imageLink, description, id }) => {
@@ -155,7 +195,6 @@ export default class ItemList extends Component {
                 <p>Price: ${price}</p>
                 <img src={imageLink} alt={`${name}`} width="600px" />
                 <p>{description}</p>
-                <button>Edit {name}</button>
                 <hr></hr>
               </div>
             );

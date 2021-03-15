@@ -6,10 +6,7 @@ const AddItem = (props) => {
     itemName,
     itemDescription,
     itemPrice,
-    handleDescOnChange,
-    handleImgLinkOnChange,
-    handleNameOnChange,
-    handlePriceOnChange,
+    handleInputOnChange,
     addItemHandle,
   } = props;
 
@@ -21,7 +18,7 @@ const AddItem = (props) => {
         type="text"
         name="itemImageLink"
         value={itemImageLink}
-        onChange={handleImgLinkOnChange}
+        onChange={handleInputOnChange}
       />
 
       <p>Input Item Name:</p>
@@ -29,7 +26,7 @@ const AddItem = (props) => {
         type="text"
         name="itemName"
         value={itemName}
-        onChange={handleNameOnChange}
+        onChange={handleInputOnChange}
       />
 
       <p>Input Item Price:</p>
@@ -37,7 +34,7 @@ const AddItem = (props) => {
         type="text"
         name="itemPrice"
         value={itemPrice}
-        onChange={handlePriceOnChange}
+        onChange={handleInputOnChange}
       />
 
       <p>Input Item Description:</p>
@@ -45,7 +42,7 @@ const AddItem = (props) => {
         type="text"
         name="itemDescription"
         value={itemDescription}
-        onChange={handleDescOnChange}
+        onChange={handleInputOnChange}
       />
       <br />
       <button onClick={addItemHandle}>Submit Item</button>
