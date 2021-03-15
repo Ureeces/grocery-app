@@ -1,11 +1,13 @@
+import MainPage from "./container/MainPage";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-// import ItemContext from "./Context/ItemContext";
-import ItemList from "./components/ItemList";
 
 function App() {
   return (
     <div className="App">
-      <ItemList />
+      <BrowserRouter>
+        <MainPage />
+      </BrowserRouter>
     </div>
   );
 }
