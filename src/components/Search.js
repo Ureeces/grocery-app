@@ -1,16 +1,39 @@
-import React from 'react';
+
+import React,{ Component } from 'react';
 import './Search.css'
 
-const Search = (props)=>{
-    console.log(props)
-    
-return(
-    <div className ="search-div">
+class Search extends Component{
+    state={
+        name:'',
+    }
 
-      <input id="input" placeholder =" Search for what you need" onChange={props.finder}></input>
 
-    </div>
-)
+// handleInputChange =()=>{
+//     this.setState({
+//         name:this.search.value
+//     })
+
+// }
+    render(){
+
+        return(
+            <div className ="search-div">
+        <form>
+
+              <input id="input" placeholder =" Search for what you need"
+              ref={input=> this.search=input}
+               onChange={this.handleInputChange}/>
+               <p>{this.state.name}</p>
+
+        </form>
+        
+        
+              
+        
+            </div>
+        )
+
+    }
 }
 
 export default Search;
