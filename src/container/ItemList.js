@@ -182,7 +182,7 @@ export default class ItemList extends Component {
       <Banner />
       {/* Search */}
       <center>
-        <Search />
+        <Search searchBoxName={"userNameSearch"} onSearchTermChange={this.onSearch} />
         <center>
         
         </center>
