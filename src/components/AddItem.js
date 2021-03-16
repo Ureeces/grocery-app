@@ -12,7 +12,7 @@ const AddItem = (props) => {
 
   return (
     <div>
-      <button>X</button>
+      <button className="delete-button">X</button>
       <p>Input Image Link:</p>
       <input
         type="text"

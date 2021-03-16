@@ -5,7 +5,7 @@ import EditItem from "../components/EditItem";
 import Banner from '../components/Banner'
 import './ItemList.css'
 // import Filter  from '../components/Filter';
-// import Search from '../components/Search';
+import Search from '../components/Search';
 
 export default class ItemList extends Component {
   state = {
@@ -180,6 +180,13 @@ export default class ItemList extends Component {
       <div>
         {/* Banner */}
       <Banner />
+      {/* Search */}
+      <center>
+        <Search />
+        <center>
+        
+        </center>
+        <br /> <br />
         {/* For Add Display */}
         <button className="add-button" onClick={this.toggleAddDisplay}>Add Item</button>
         {this.state.addDisplayOn ? (
@@ -193,7 +200,7 @@ export default class ItemList extends Component {
             handleInputOnChange={this.handleInputOnChange}
           />
         ) : null}{" "}
-        <br />
+        <br /><br />
         <select class="selector" onChange={this.handleEditSelect}>
           <option selected disabled>
             Select an Item to Edit
@@ -202,36 +209,42 @@ export default class ItemList extends Component {
             return <option value={id}>{name}</option>;
           })}
         </select>
-        <button onClick={this.toggleEditDisplay}>Edit Item</button>
+         
+         <button onClick={this.toggleEditDisplay}>Edit Item</button>
         {this.state.editDisplayOn ? (
           <EditItem
-            itemList={this.state.itemList}
-            tempName={this.state.tempName}
-            tempPrice={this.state.tempPrice}
-            tempDescription={this.state.tempDescription}
-            tempImageLink={this.state.tempImageLink}
-            editItemHandle={this.editItemHandle}
-            handleInputOnChange={this.handleInputOnChange}
+          itemList={this.state.itemList}
+          tempName={this.state.tempName}
+          tempPrice={this.state.tempPrice}
+          tempDescription={this.state.tempDescription}
+          tempImageLink={this.state.tempImageLink}
+          editItemHandle={this.editItemHandle}
+          handleInputOnChange={this.handleInputOnChange}
           />
-        ) : null}{" "}
+          ) : null}{" "}
+          </center> 
         {/* Item List Display */}
         {this.state.itemList.map(
           ({ name, price, imageLink, description, id }) => {
             return (
-              <div class ="products products-table">
+             <center>
+
+
+             <div class ="products products-table">
                 <div class="product">
 
-                <button onClick={() => this.deleteItemHandle(id)}>X</button>
+                <button className ="delete-button" onClick={() => this.deleteItemHandle(id)}>X</button>
                 <img class="product-img"src={imageLink} alt={`${name}`} />
-                </div>
                 <div class="product-content">
 
                 <h3> {name}</h3>
                 <small>{description}</small>
                 <p class="product-text price">Price: ${price}</p>
                 </div>
+                </div>
                 {/* <hr></hr> */}
               </div>
+        </center>
             );
           }
         )}

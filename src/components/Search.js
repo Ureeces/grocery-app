@@ -1,39 +1,17 @@
 
-import React,{ Component } from 'react';
-import './Search.css'
+import React, {useState} from 'react'
 
-class Search extends Component{
-    state={
-        name:'',
-    }
+export default function Search() {
+    const[ search,setSearch]= useState('')
+    return(
+        <div>
+           <input 
+        type="text"
+        placeholder="Search Items"
+        value={search}
+        onChange={(e)=> setSearch(e.target.value)}/>   
+        </div>
+       
 
-
-// handleInputChange =()=>{
-//     this.setState({
-//         name:this.search.value
-//     })
-
-// }
-    render(){
-
-        return(
-            <div className ="search-div">
-        <form>
-
-              <input id="input" placeholder =" Search for what you need"
-              ref={input=> this.search=input}
-               onChange={this.handleInputChange}/>
-               <p>{this.state.name}</p>
-
-        </form>
-        
-        
-              
-        
-            </div>
-        )
-
-    }
+    )
 }
-
-export default Search;

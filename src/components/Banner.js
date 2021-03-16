@@ -5,7 +5,8 @@ const Banner = (props)=>{
 return(
     <div className ="banner">
 
-    <header><h1> Rocky's</h1><em className="em">What you want, we got </em></header>
+    <header><h1> Rocky's</h1>
+        </header>
     </div>
     
     
