@@ -5,6 +5,7 @@ import EditItem from "../components/EditItem";
 import Banner from "../components/Banner";
 import ItemListView from "./ItemListView";
 import "./ItemList.css";
+import "../components/Search.css";
 
 export default class ItemList extends Component {
   state = {
@@ -156,12 +157,6 @@ export default class ItemList extends Component {
           tempPrice: price,
           tempImageLink: imageLink,
           tempDescription: description,
-        };
-      });
-    } else {
-      this.setState((prevState) => {
-        return {
-          ...prevState,
         };
       });
     }

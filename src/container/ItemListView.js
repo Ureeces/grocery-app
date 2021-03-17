@@ -1,5 +1,6 @@
 import React from "react";
 import "./ItemList.css";
+import "../components/Search.css";
 
 const ItemListView = (props) => {
   return (
