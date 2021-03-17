@@ -12,7 +12,6 @@ const EditItem = (props) => {
 
   return (
     <div>
-      <button className="delete-button">X</button>
       <p>Input Image Link:</p>
       <input
         type="text"

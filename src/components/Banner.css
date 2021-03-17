@@ -1,21 +1,22 @@
-header{
+header {
     text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #fff, 0 0 60px #ffff, 0 0 70px #ffff, 0 0 80px #fff;
-text-align: center;
-padding-top: 40px;
-/* height : 103px; */
-background-image: linear-gradient(to bottom, #090909, #ffff);
-font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
-top: 57px;
-
+    text-align: center;
+    padding-top: 40px;
+    /* height : 103px; */
+    background-image: linear-gradient(to bottom, #090909, #ffff);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+    top: 57px;
 }
+
 .em{
     text-align: right;
     color: grey;
     text-decoration: underline;
     margin-top: 40%;
 }
- h1{
-     font-size: 56px;
+
+h1{
+    font-size: 56px;
  }
 
 

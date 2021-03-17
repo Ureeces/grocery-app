@@ -1,13 +1,12 @@
-
-import ItemList from './container/ItemList'
-import { BrowserRouter } from 'react-router-dom';
-import './App.css';
+import ItemList from "./container/ItemList";
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-      <ItemList />
+        <ItemList />
       </BrowserRouter>
     </div>
   );
