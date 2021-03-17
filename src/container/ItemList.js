@@ -142,10 +142,20 @@ export default class ItemList extends Component {
   toggleEditDisplay = (event) => {
     event.preventDefault();
 
+    const selectedItemObj = this.state.itemList.filter((item) => {
+      return item.id === this.state.selectedItemID;
+    });
+
+    const { name, price, imageLink, description } = selectedItemObj[0];
+
     this.setState((prevState) => {
       return {
         ...prevState,
         editDisplayOn: !prevState.editDisplayOn,
+        tempName: name,
+        tempPrice: price,
+        tempImageLink: imageLink,
+        tempDescription: description,
       };
     });
   };
