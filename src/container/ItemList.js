@@ -146,18 +146,25 @@ export default class ItemList extends Component {
       return item.id === this.state.selectedItemID;
     });
 
-    const { name, price, imageLink, description } = selectedItemObj[0];
-
-    this.setState((prevState) => {
-      return {
-        ...prevState,
-        editDisplayOn: !prevState.editDisplayOn,
-        tempName: name,
-        tempPrice: price,
-        tempImageLink: imageLink,
-        tempDescription: description,
-      };
-    });
+    if (selectedItemObj.length !== 0) {
+      const { name, price, imageLink, description } = selectedItemObj[0];
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+          editDisplayOn: !prevState.editDisplayOn,
+          tempName: name,
+          tempPrice: price,
+          tempImageLink: imageLink,
+          tempDescription: description,
+        };
+      });
+    } else {
+      this.setState((prevState) => {
+        return {
+          ...prevState,
+        };
+      });
+    }
   };
   /****************************************************************
    * Functions for Searching Item
@@ -179,7 +186,9 @@ export default class ItemList extends Component {
       });
     } else {
       const searchArr = this.state.itemList.filter((item) => {
-        return item.name.includes(this.state.searchItem);
+        return item.name
+          .toLowerCase()
+          .includes(this.state.searchItem.toLowerCase());
       });
 
       this.setState({
