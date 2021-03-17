@@ -1,12 +1,13 @@
-import MainPage from "./container/MainPage";
-import { BrowserRouter } from "react-router-dom";
-import "./App.css";
+
+import ItemList from './container/ItemList'
+import { BrowserRouter } from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <MainPage />
+      <ItemList />
       </BrowserRouter>
     </div>
   );
